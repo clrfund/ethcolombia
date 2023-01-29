@@ -317,7 +317,8 @@ function toggleNotice() {
   align-items: flex-start;
   gap: 1.5rem;
   margin-top: 1rem;
-  max-width: 800px;
+  max-width: inherit;
+  width: 100%;
   @media (max-width: $breakpoint-m) {
     padding: 1rem;
     padding-bottom: 4rem;
