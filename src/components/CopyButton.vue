@@ -10,7 +10,7 @@
     :class="`${myClass || 'copy-icon'} ${hasBorder && 'border'}`"
     @click="copyToClipboard"
   >
-    <img width="16px" src="@/assets/copy.svg" />
+    <img src="@/assets/copy.svg" />
   </div>
 </template>
 
@@ -69,6 +69,7 @@ async function copyToClipboard(): Promise<void> {
 }
 
 img {
+  width: 16px;
   filter: var(--img-filter, invert(0.7));
 }
 </style>
