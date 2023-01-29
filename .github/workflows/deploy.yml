@@ -23,7 +23,7 @@ jobs:
     - name: Install, build
       run: |
         yarn install --frozen-lockfile
-        yarn build
+        yarn vite build --base=/ethcolombia/
     - name: Cache build
       uses: actions/cache@v2
       with:
