@@ -1,5 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router'
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 const Leaderboard = () => import('@/views/Leaderboard.vue')
 const Landing = () => import('@/views/Landing.vue')
 const About = () => import('@/views/About.vue')
@@ -128,7 +128,9 @@ const routes: Array<RouteRecordRaw> = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  // https://router.vuejs.org/guide/essentials/history-mode.html#html5-mode
+  // use hash mode to avoid handling 404 error for github pages
+  history: createWebHashHistory(import.meta.env.BASE_URL),
   routes,
 })
 
