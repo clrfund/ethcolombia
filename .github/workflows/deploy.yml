@@ -9,6 +9,7 @@ env:
   VITE_GIT_COMMIT: ${{ github.sha }}
   BUILD_BASE: '/${{ github.event.repository.name }}/'
   DOMAIN: '${{ github.event.repository.name }}.clr.fund'
+  GEN_CNAME: 'no'
 
 jobs:
 
@@ -47,6 +48,7 @@ jobs:
         path: ./*
         key: ${{ github.sha }}
     - name: Create CNAME file
+      if: ${{ env.GEN_CNAME }} == 'yes'
       run: |
         echo ${{ env.DOMAIN }} > ./dist/CNAME
     - name: Push to gh-pages
