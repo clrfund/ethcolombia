@@ -76,11 +76,20 @@ const { operator } = storeToRefs(useRoundStore())
 
 useMeta(
   computed(() => {
+    const theOperator = operator.value || ''
     const title = route.meta.title || ''
     return {
-      title,
-      titleTemplate: `${operator} - %s`,
-      'git-commit': import.meta.env.VITE_GIT_COMMIT || '',
+      // titleTemplate no longer works in vue-meta3
+      // construct the title dynamically instead
+      title: `${theOperator} - ${title}`,
+      // meta also does not work like in vue-meta2,
+      // name is always meta, use description instead
+      meta: [
+        {
+          description: 'git-commit',
+          content: import.meta.env.VITE_GIT_COMMIT || '',
+        },
+      ],
     }
   })
 )
