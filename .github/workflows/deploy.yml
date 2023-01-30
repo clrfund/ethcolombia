@@ -48,7 +48,7 @@ jobs:
         path: ./*
         key: ${{ github.sha }}
     - name: Create CNAME file
-      if: ${{ env.GEN_CNAME }} == 'yes'
+      if: env.GEN_CNAME == 'yes'
       run: |
         echo ${{ env.DOMAIN }} > ./dist/CNAME
     - name: Push to gh-pages
