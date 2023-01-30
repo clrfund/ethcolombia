@@ -42,7 +42,7 @@ const routes: Array<RouteRecordRaw> = [
     name: 'projects',
     component: Leaderboard,
     meta: {
-      title: 'Project Leaderboard',
+      title: 'Leaderboard',
     },
   },
   {

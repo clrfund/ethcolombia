@@ -1,4 +1,7 @@
 <template>
+  <metainfo v-if="ready">
+    <template v-slot:title="{ content }">{{ content }}</template>
+  </metainfo>
   <div id="app" class="wrapper">
     <nav-bar />
     <div id="content-container">
@@ -57,7 +60,7 @@ const showBreadCrumb = ref(false)
 const isSidebarShown = ref(false)
 
 const route = useRoute()
-const routeName = computed(() => (route ? route.name : ''))
+const routeName = computed(() => (route ? route.name?.toString() : ''))
 
 watch(routeName, (newValue) => {
   const newRouteName = String(newValue)
@@ -66,21 +69,21 @@ watch(routeName, (newValue) => {
   showBreadCrumb.value = !excludeBreadCrumb.includes(newRouteName)
 })
 
-const { init } = useAppStore()
+const appStore = useAppStore()
+const { init } = appStore
+const { ready } = storeToRefs(appStore)
 const { operator } = storeToRefs(useRoundStore())
 
-// https://stackoverflow.com/questions/71785473/how-to-use-vue-meta-with-vue3
-// https://www.npmjs.com/package/vue-meta/v/3.0.0-alpha.7
-useMeta({
-  title: route.meta.title,
-  titleTemplate: `${operator} - %s`,
-  meta: [
-    {
-      name: 'git-commit',
-      content: import.meta.env.VITE_GIT_COMMIT || '',
-    },
-  ],
-})
+useMeta(
+  computed(() => {
+    const title = route.meta.title || ''
+    return {
+      title,
+      titleTemplate: `${operator} - %s`,
+      'git-commit': import.meta.env.VITE_GIT_COMMIT || '',
+    }
+  })
+)
 
 onMounted(async () => {
   await init()

@@ -32,6 +32,7 @@ import ClaimButton from '@/components/ClaimButton.vue'
 import { useProjectStore } from '@/stores'
 import { useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
+import { useMeta } from 'vue-meta'
 
 const store = useProjectStore()
 const { ready } = storeToRefs(store)
@@ -44,6 +45,10 @@ const projectId = computed(() =>
 const project = computed(() =>
   ready ? store.getProject(projectId.value) : null
 )
+
+useMeta({
+  title: project.value?.name || '',
+})
 </script>
 
 <style scoped lang="scss">
