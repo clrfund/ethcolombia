@@ -8,6 +8,7 @@ env:
   NODE_VERSION: 16.x
   VITE_GIT_COMMIT: ${{ github.sha }}
   BUILD_BASE: '/${{ github.event.repository.name }}/'
+  DOMAIN: '${{ github.event.repository.name }}.clr.fund'
 
 jobs:
 
@@ -45,6 +46,9 @@ jobs:
       with:
         path: ./*
         key: ${{ github.sha }}
+    - name: Create CNAME file
+      run: |
+        echo ${{ domain }} > ./dist/CNAME
     - name: Push to gh-pages
       uses: peaceiris/actions-gh-pages@v3
       with:
