@@ -6,6 +6,8 @@ on:
 
 env:
   NODE_VERSION: 16.x
+  VITE_GIT_COMMIT: ${{ github.sha }}
+  BUILD_BASE: '/${{ github.event.repository.name }}/'
 
 jobs:
 
@@ -23,7 +25,7 @@ jobs:
     - name: Install, build
       run: |
         yarn install --frozen-lockfile
-        yarn vite build --base=/ethcolombia/
+        yarn vite build --base=${{ env.BUILD_BASE }}
     - name: Cache build
       uses: actions/cache@v2
       with:
