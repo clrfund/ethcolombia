@@ -19,13 +19,15 @@
           <div class="hr" />
           <div>
             <div v-if="isSimpleView">
-              <leaderboard-simple-view
-                v-for="(project, index) in leaderboardProjects"
-                :project="project"
-                :key="project.id"
-                :rank="index + 1"
-                :round="roundInfo"
-              ></leaderboard-simple-view>
+              <table class="simple-table">
+                <leaderboard-simple-view
+                  v-for="(project, index) in leaderboardProjects"
+                  :project="project"
+                  :key="project.id"
+                  :rank="index + 1"
+                  :round="roundInfo"
+                ></leaderboard-simple-view>
+              </table>
             </div>
             <div v-else>
               <leaderboard-detail-view
@@ -96,5 +98,10 @@ function toggleView() {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+}
+
+.simple-table {
+  width: 100%;
+  border-collapse: collapse;
 }
 </style>
