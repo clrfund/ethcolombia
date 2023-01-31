@@ -7,8 +7,10 @@ env:
   NODE_VERSION: 16.x
 
 jobs:
-  install:
+  build:
     runs-on: ubuntu-22.04
+    outputs:
+      cid: ${{ steps.upload.outputs.cid }}
     steps:
     - name: Use Node.js ${{ env.NODE_VERSION }}
       uses: actions/setup-node@v3
@@ -25,13 +27,6 @@ jobs:
       run: |
         ipfs init
         ipfs daemon &
-
-  build:
-    runs-on: ubuntu-22.04
-    needs: install
-    outputs:
-      cid: ${{ steps.upload.outputs.cid }}
-    steps:
     - id: checkout
       name: Checkout
       uses: actions/checkout@v2
