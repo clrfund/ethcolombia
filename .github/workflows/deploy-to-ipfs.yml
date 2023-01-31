@@ -41,10 +41,11 @@ jobs:
         echo "VITE_GIT_COMMIT=${{ env.BUILD_VERSION }}-${{ env.GITHUB_SHA_SHORT }}" >> $GITHUB_ENV
         yarn install --frozen-lockfile
         yarn vite build
-    - name: Upload
+    - id: upload
+      name: Upload
       run: |
         ipfs add --recursive --progress ./dist/ | tee add.out
-        hash=$(cat add.out | sed -n 's/added \(.*\) dist$/\1/p')
+        hash=$(grep 'added .* dist$' add.out | sed -n 's/added \(.*\) dist$/\1/p')
         echo "cid=${hash}" >> $GITHUB_OUTPUT
   
   pin:
