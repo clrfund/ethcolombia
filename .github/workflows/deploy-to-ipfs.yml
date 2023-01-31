@@ -1,0 +1,65 @@
+name: Deploy to IPFS
+
+on:
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: 16.x
+
+jobs:
+  install:
+    runs-on: ubuntu-22.04
+    steps:
+    - name: Use Node.js ${{ env.NODE_VERSION }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+    - name: Install IPFS
+      run: |
+        wget https://dist.ipfs.tech/kubo/v0.18.1/kubo_v0.18.1_linux-amd64.tar.gz
+        tar -xvzf kubo_v0.18.1_linux-amd64.tar.gz
+        cd kubo
+        ./install.sh
+        ipfs --version
+    - name: Run IPFS daemon
+      run: |
+        ipfs init
+        ipfs daemon &
+
+  build:
+    runs-on: ubuntu-22.04
+    needs: install
+    outputs:
+      cid: ${{ steps.upload.outputs.cid }}
+    steps:
+    - id: checkout
+      name: Checkout
+      uses: actions/checkout@v2
+    - name: Use Node.js ${{ env.NODE_VERSION }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+    - name: Build
+      env: 
+          VITE_GIT_COMMIT: "${{ outputs.version }}-${{ github.sha }}"
+      run: |
+        echo "GITHUB_SHA_SHORT=$(echo ${{ github.sha }} | cut -c 1-6)" >> $GITHUB_ENV
+        echo "BUILD_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
+        echo "VITE_GIT_COMMIT=${{ BUILD_VERSION }}-${{ env.GITHUB_SHA_SHORT }}" >> $GITHUB_ENV
+        yarn install --frozen-lockfile
+        yarn vite build
+    - name: Upload
+      run: |
+        ipfs add --recursive --progress ./dist/ | tee add.out
+        hash=$(cat add.out | sed -n 's/added \(.*\) dist$/\1/p')
+        echo "cid=${hash}" >> $GITHUB_OUTPUT
+  
+  pin:
+    runs-on: ubuntu-22.04
+    needs: build
+    steps:
+    - name: Pin to pinata
+      run: |
+        curl "https://ipfs.infura.io:5001/api/v0/pin/add?arg=${{ needs.build.outputs.cid }}" \
+        -X POST \
+        -u "${{ secrets.INFURA_ID }}:${{ secrets.INFURA_SECRET }}"
