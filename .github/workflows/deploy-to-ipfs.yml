@@ -40,8 +40,6 @@ jobs:
       with:
         node-version: ${{ env.NODE_VERSION }}
     - name: Build
-      env: 
-          VITE_GIT_COMMIT: "${{ outputs.version }}-${{ github.sha }}"
       run: |
         echo "GITHUB_SHA_SHORT=$(echo ${{ github.sha }} | cut -c 1-6)" >> $GITHUB_ENV
         echo "BUILD_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
