@@ -16,17 +16,6 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ env.NODE_VERSION }}
-    - name: Install IPFS
-      run: |
-        wget https://dist.ipfs.tech/kubo/v0.18.1/kubo_v0.18.1_linux-amd64.tar.gz
-        tar -xvzf kubo_v0.18.1_linux-amd64.tar.gz
-        cd kubo
-        ./install.sh
-        ipfs --version
-    - name: Run IPFS daemon
-      run: |
-        ipfs init
-        ipfs daemon &
     - id: checkout
       name: Checkout
       uses: actions/checkout@v2
@@ -36,34 +25,15 @@ jobs:
         node-version: ${{ env.NODE_VERSION }}
     - name: Build
       run: |
-        GITHUB_SHA_SHORT=$(echo ${{ github.sha }} | cut -c 1-6)
-        BUILD_VERSION=$(node -p "require('./package.json').version")
-        export VITE_GIT_COMMIT="${{ env.BUILD_VERSION }}-${{ env.GITHUB_SHA_SHORT }}"
+        export GITHUB_SHA_SHORT=$(echo ${{ github.sha }} | cut -c 1-6)
+        export BUILD_VERSION=$(node -p "require('./package.json').version")
+        export VITE_GIT_COMMIT="${BUILD_VERSION}-${GITHUB_SHA_SHORT}"
         echo VITE_GIT_COMMIT=$VITE_GIT_COMMIT
         yarn install --frozen-lockfile
         yarn vite build
     - id: upload
       name: Upload
       run: |
-        ipfs add --recursive --progress ./dist/ | tee add.out
-        hash=$(grep 'added .* dist$' add.out | sed -n 's/added \(.*\) dist$/\1/p')
-        echo "cid=${hash}" >> $GITHUB_OUTPUT
-
-  pin:
-    runs-on: ubuntu-22.04
-    needs: build
-    steps:
-    - name: Pin to pinata
-      run: |
-        JSON_DATA=$(echo { "hashToPin": "${{ needs.build.outputs.cid }}"})
-        curl --location --request POST 'https://api.pinata.cloud/pinning/pinByHash' \
-        --header "Authorization: Bearer ${{ secrets.PINATA_JWT }}" \
-        --header 'Content-Type: application/json' \
-        --data-raw  "{ \"hashToPin\": \"${{ needs.build.outputs.cid }}\"}"
-        # wait for pinata to pin the files
-        for i in {1..3}; do \
-          curl --location --request GET \
-          "https://api.pinata.cloud/pinning/pinJobs?ipfs_pin_hash=${{ needs.build.outputs.cid }}&status=retrieving&sort=ASC" \
-          --header "Authorization: Bearer ${{ secrets.PINATA_JWT }}"
-          sleep 30; \
-        done
+        npm i -g pinata-upload-cli
+        pinata-cli -a ${{ secrets.PINATA_JWT }}
+        pinata-cli -u ./dist
