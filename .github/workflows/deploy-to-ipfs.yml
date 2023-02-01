@@ -9,8 +9,6 @@ env:
 jobs:
   build:
     runs-on: ubuntu-22.04
-    outputs:
-      cid: ${{ steps.upload.outputs.cid }}
     steps:
     - name: Use Node.js ${{ env.NODE_VERSION }}
       uses: actions/setup-node@v3
@@ -39,6 +37,7 @@ jobs:
         echo "GITHUB_SHA_SHORT=$(echo ${{ github.sha }} | cut -c 1-6)" >> $GITHUB_ENV
         echo "BUILD_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
         echo "VITE_GIT_COMMIT=${{ env.BUILD_VERSION }}-${{ env.GITHUB_SHA_SHORT }}" >> $GITHUB_ENV
+        echo VITE_GIT_COMMIT=$VITE_GIT_COMMIT
         yarn install --frozen-lockfile
         yarn vite build
     - id: upload
@@ -46,16 +45,6 @@ jobs:
       run: |
         ipfs add --recursive --progress ./dist/ | tee add.out
         hash=$(grep 'added .* dist$' add.out | sed -n 's/added \(.*\) dist$/\1/p')
-        echo "cid=${hash}" >> $GITHUB_OUTPUT
-  
-  pin:
-    runs-on: ubuntu-22.04
-    needs: build
-    steps:
-    - name: Pin to pinata
-      run: |
-        JSON_DATA=$(echo { "hashToPin": "${{ needs.build.outputs.cid }}"})
-        curl --location --request POST 'https://api.pinata.cloud/pinning/pinByHash' \
-        --header "Authorization: Bearer ${{ secrets.PINATA_JWT }}" \
-        --header 'Content-Type: application/json' \
-        --data-raw  "{ \"hashToPin\": \"${{ needs.build.outputs.cid }}\"}"
+        ipfs pin remote service add pinata https://api.pinata.cloud/psa ${{ secrets.PINATA_JWT }}
+        ipfs pin remote add --service=pinata --name=${hash} ${hash}
+        ipfs pin remote ls --service=pinata
