@@ -54,6 +54,8 @@ jobs:
     steps:
     - name: Pin to pinata
       run: |
-        curl "https://ipfs.infura.io:5001/api/v0/pin/add?arg=${{ needs.build.outputs.cid }}" \
-        -X POST \
-        -u "${{ secrets.INFURA_ID }}:${{ secrets.INFURA_SECRET }}"
+        JSON_DATA=$(echo { "hashToPin": "${{ needs.build.outputs.cid }}"})
+        curl --location --request POST 'https://api.pinata.cloud/pinning/pinByHash' \
+        --header "Authorization: Bearer ${{ secrets.PINATA_JWT }}" \
+        --header 'Content-Type: application/json' \
+        --data-raw  "{ \"hashToPin\": \"${{ needs.build.outputs.cid }}\"}"
