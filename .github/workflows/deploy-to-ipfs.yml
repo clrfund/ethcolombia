@@ -51,5 +51,6 @@ jobs:
       name: Upload
       run: |
         echo ${{ env.IPFS_DEPLOY_CLOUDFLARE__RECORD }}
-        #npm install -g ipfs-deploy
+        npm install -g ipfs-deploy
         #ipfs-deploy -u pinata -p infura -d cloudflare ./dist
+        ipfs-deploy -u pinata -p infura ./dist
