@@ -490,16 +490,16 @@
   },
   "landing": {
     "hero": {
-      "title": "QUADRATIC FUNDING {'@'}DEVCON!",
-      "subtitle": "QF {'@'} Devcon for the LatAm Community! Brought to you by:",
+      "title": "Send your favorite Ethereum staking projects to the moon!",
+      "subtitle": "Every project you contribute to gets a portion of extra funding.",
       "info": "How it works"
     },
     "view_results": "View Results",
     "how": {
       "title": "Every donation is amplified by the matching pool.",
-      "paragraph": "This fundraiser rewards projects with the most unique demand, not just those with the wealthiest backers.",
+      "paragraph": "This fundraiser rewards staking projects with the most unique demand, not just those with the wealthiest backers.",
       "subtitle": "How it works",
-      "list-1": "{operator} and other donors send funds to the matching pool smart contract.",
+      "list-1": "The Ethereum Foundation, clr.fund, CLR Coop, and other donors send funds to the matching pool smart contract.",
       "list-2": "The round begins and you can donate to your favorite projects.",
       "list-3": "Once the round finishes, the smart contract distributes the matching pool funds to projects weighted primarily by number of contributions,",
       "list-3-strong": "not contribution value",
@@ -578,9 +578,6 @@
     "p1": "The round is officially closed",
     "p2": "It's now too late to contribute or reallocate your donations!",
     "div4": "Great!",
-    "div13": "Round status",
-    "tooltip6": "If you're a project owner you can now claim your funds!",
-    "div14": "Contributions are ready to claim 🎉",
     "div15": "Total in round",
     "tooltip7": "This total includes the funds in the matching pool and all contributions from the community.",
     "div16": "Matching pool",
