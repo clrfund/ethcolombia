@@ -133,7 +133,7 @@ function toggleHelpDropdown(): void {
       overflow: hidden;
 
       @media (max-width: $breakpoint-s) {
-        right: -4.5rem;
+        right: 0.5rem;
       }
 
       .dropdown-title {
