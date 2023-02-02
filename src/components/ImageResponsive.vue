@@ -2,7 +2,7 @@
   <img
     :src="src"
     :srcset="srcset"
-    sizes="(max-width: 710px) 360px,
+    sizes="(max-width: 710px) 180px,
      (max-width: 810px) 360px, 
      (max-width: 1080px) 720px, 
      (max-width: 1440px) 1080px, 
