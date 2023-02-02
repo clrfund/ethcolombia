@@ -519,21 +519,6 @@ function toggleNotice() {
   }
 } */
 
-.add-link {
-  display: flex;
-  gap: 0.25rem;
-  color: $clr-green;
-  margin-left: auto;
-  cursor: pointer;
-  &:hover {
-    opacity: 0.8;
-  }
-}
-
-.add-funds-link {
-  font-size: 14px;
-}
-
 .status {
   font-size: 16px;
   display: flex;
