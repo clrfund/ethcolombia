@@ -54,26 +54,6 @@
             {{ $t('roundInfo.div4') }}
           </div>
         </div>
-        <template>
-          <div v-if="isRoundFinalized" class="round-info-item">
-            <div class="full-width">
-              <div class="round-info-item-top">
-                <div class="round-info-title">{{ $t('roundInfo.div13') }}</div>
-                <div
-                  v-tooltip="{
-                    content: $t('roundInfo.tooltip6'),
-                    trigger: 'hover click',
-                  }"
-                >
-                  <img width="16px" src="@/assets/info.svg" />
-                </div>
-              </div>
-              <div class="round-info-value">
-                <div class="message">{{ $t('roundInfo.div14') }}</div>
-              </div>
-            </div>
-          </div>
-        </template>
         <div class="round-value-info">
           <div class="round-value-info-item">
             <div class="full-width">
@@ -85,7 +65,7 @@
                     trigger: 'hover click',
                   }"
                 >
-                  <img width="16px" src="@/assets/info.svg" />
+                  <img class="info-img" src="@/assets/info.svg" />
                 </div>
               </div>
               <div class="round-info-value">
@@ -103,7 +83,7 @@
                   trigger: 'hover click',
                 }"
               >
-                <img width="16px" src="@/assets/info.svg" />
+                <img class="info-img" src="@/assets/info.svg" />
               </div>
             </div>
 
@@ -556,6 +536,10 @@ function toggleNotice() {
   filter: var(--img-filter, invert(0.7));
 }
 
+.tooltip-content {
+  width: 300px;
+}
+
 .contract-popover {
   background-color: var(--bg-primary-color);
   color: var(--text-color);
@@ -567,5 +551,9 @@ function toggleNotice() {
   border: solid 1px var(--border-highlight);
   border-radius: 6px;
   box-shadow: 0 6px 30px #0000001a;
+}
+
+.info-img {
+  width: 16px;
 }
 </style>
