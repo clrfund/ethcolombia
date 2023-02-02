@@ -229,7 +229,7 @@ function toggleNotice() {
 
 .image-wrapper {
   border-radius: 8px;
-  background: var(--bg-gradient);
+  background: $clr-pink-dark-gradient;
   height: 160px;
   width: 100%;
   display: flex;

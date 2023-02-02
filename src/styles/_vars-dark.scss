@@ -6,9 +6,9 @@
   // workaround for using css variables with sass mixins
   --text-color-rgb: 255, 255, 255;
 
-  --brand-primary: #5d69ff;
-  --brand-secondary: #5d69ff;
-  --brand-tertiary: #edbc00;
+  --brand-primary: #211e2b;
+  --brand-secondary: #211e2b;
+  --brand-tertiary: #211e2b;
 
   --error-color: #bd6b5e;
   --warning-color: rgb(253, 254, 106);
@@ -29,8 +29,8 @@
   --img-filter: none;
 
   --bg-primary-color: #191623;
-  --bg-secondary-color: #191623;
-  --bg-light-color: #5d69ff;
+  --bg-secondary-color: #211e2b;
+  --bg-light-color: #2c2938;
 
   // alternative background colors for light and dark modes
   --bg-secondary-highlight: #211e2b;
@@ -39,7 +39,10 @@
   --bg-light-accent: #2c2938;
 
   --bg-transparent: rgba(25, 22, 35, 0.902);
-  --bg-gradient: #050022;
+  --bg-gradient: linear-gradient(
+    109.01deg,
+    #9789c4 6.45%,
+    #c72ab9 99.55%);
   --bg-gradient-hero: linear-gradient(
     286.78deg,
     rgba(173, 131, 218, 0) -32.78%,
@@ -64,9 +67,9 @@
   );
   --bg-circle: #2a2736;
 
-  --button-secondary-color: #5d69ff;
+  --button-secondary-color: #16c8b5;
   --button-secondary-bg: none;
-  --button-secondary-border: #5d69ff;
+  --button-secondary-border: #16c8b5;
   --button-action: #5d69ff;
 
   --explorer-border: var(--text-color);

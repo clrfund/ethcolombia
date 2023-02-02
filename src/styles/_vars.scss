@@ -43,3 +43,11 @@ $breakpoint-s: 414px;
 $breakpoint-m: 800px;
 $breakpoint-l: 1200px;
 $breakpoint-xl: 1500px;
+
+$clr-pink-light-gradient: linear-gradient(
+  109.01deg,
+  #9789c4 6.45%,
+  #c72ab9 99.55%
+);
+$clr-pink-dark-gradient: linear-gradient(315deg, #c72ab9 0%, #252a77 100%);
+

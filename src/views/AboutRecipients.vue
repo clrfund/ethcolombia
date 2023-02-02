@@ -82,12 +82,54 @@
       </li>
     </ol>
 
+    <h3>Complete KYC</h3>
+    <p>
+      You'll submit a contact email address as part of your project's
+      application. The email address will not be stored on-chain (with the rest
+      of the application data) but it will be sent to the registry admin (the
+      clr.fund team) and the Ethereum Foundation for the purposes of completing
+      your KYC. The Ethereum Foundation will use this email address to contact
+      you and verify information about your project. The registry admin may
+      reject projects that don't meet the round criteria or pass KYC/AML
+      requirements.
+    </p>
     <p>
       {{ $t('recipients.register.p4') }}
     </p>
     <p>
       {{ $t('recipients.register.p5', { depositToken: chain.currency }) }}
     </p>
+    <h4>Required documents</h4>
+    <p style="text-decoration: underline">For individuals</p>
+    <ol>
+      <li>Scanned copy of passport</li>
+      <li>
+        Proof of address from within the last 3 months, such as bank statement,
+        utility bill or telecom subscription
+      </li>
+    </ol>
+    <p style="text-decoration: underline">For organizations</p>
+    <ol>
+      <li>Certificate of Incorporation</li>
+      <li>
+        Proof of address from within the last 3 months, such as bank statement,
+        utility bill or telecom subscription
+      </li>
+      <li>
+        Shareholders' and Directors' registers / Members' register (for
+        organization without shareholdings)
+      </li>
+      <li>
+        For each director, officer and individual shareholder (more than 10%),
+        please provide (i) scan copy of passport, and (ii) copy of proof of
+        address
+      </li>
+      <li>
+        If the shareholder is an organization and holds more than 10%, please
+        provide 1 through 4
+      </li>
+    </ol>
+
     <h2>{{ $t('recipients.claim.h2') }}</h2>
     <p>
       {{ $t('recipients.claim.p') }}

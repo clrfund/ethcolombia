@@ -6,7 +6,7 @@
 }
 
 .btn-action {
-  @include button(white, var(--button-action), none);
+  @include button(white, $clr-pink-light-gradient, none);
 }
 
 .btn-secondary {
@@ -18,11 +18,7 @@
 }
 
 .btn-info {
-  @include button(
-    var(--text-color),
-    var(--bg-primary-color),
-    2px solid var(--loader-color)
-  );
+  @include button(white, #19162380, 2px solid white);
 }
 
 .btn-warning {

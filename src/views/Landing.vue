@@ -12,14 +12,6 @@
             <div id="subtitle" class="subtitle">
               {{ $t('landing.hero.subtitle') }}
             </div>
-
-            <div class="organizers-wrapper">
-              <image-responsive
-                title="organizers"
-                class="organizers"
-                alt="organizers of QF round."
-              />
-            </div>
             <div class="btn-group">
               <links to="/projects" class="btn-action">{{
                 $t('landing.view_results')
@@ -299,7 +291,7 @@ ol li::before {
 #hero {
   position: relative;
   overflow: hidden;
-  background: var(--bg-gradient);
+  background: $clr-pink-dark-gradient;
   padding: 0;
   min-height: 639px; /* This is the height when adding in the callout */
   display: flex;
@@ -312,6 +304,7 @@ ol li::before {
   .image-wrapper img {
     position: absolute;
     padding-top: 2rem;
+    mix-blend-mode: exclusion;
     width: 70%;
     max-width: 880px;
     height: auto;
@@ -328,7 +321,7 @@ ol li::before {
   .hero-content {
     padding: 2rem;
     position: relative;
-    max-width: 60ch;
+    max-width: 40%;
     min-height: 400px;
     display: flex;
     flex-direction: column;
@@ -345,26 +338,10 @@ ol li::before {
         89.75%
       );
     }
-
-    .organizers-wrapper {
-      padding-top: 2rem;
-      padding-bottom: 4rem;
-      grid-area: image;
-      position: relative;
-      display: flex;
-      max-width: 85%;
-
-      align-items: left;
-      .organizers {
-        position: relative;
-        margin: 0;
-        max-width: 100%;
-      }
-    }
   }
 
   #moon {
-    mix-blend-mode: color-dodge;
+    mix-blend-mode: exclusion;
     position: absolute;
     top: 0;
     right: 0;
