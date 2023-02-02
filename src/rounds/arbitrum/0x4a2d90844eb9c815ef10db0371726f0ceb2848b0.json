@@ -1,7 +1,5 @@
 {
   "round": {
-    "chainId": 42161,
-    "operator": "ETHColombia",
     "address": "0x4a2d90844eb9c815ef10db0371726f0ceb2848b0",
     "nativeTokenAddress": "0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1",
     "nativeTokenDecimals": 18,
@@ -9,10 +7,7 @@
     "contributorCount": 5944,
     "matchingPoolSize": "257206288353860620833259",
     "totalSpent": "3505672539",
-    "voiceCreditFactor": {
-      "type": "BigNumber",
-      "hex": "0x09184e72a000"
-    },
+    "voiceCreditFactor": "10000000000000",
     "isFinalized": true,
     "isCancelled": false,
     "tallyHash": "QmQSe3VYt6poLtC4rwVtSiuHJu8NzDorYuHRpJdppEuYDC",
@@ -21,8 +16,14 @@
     "endTime": 1669073402,
     "signUpDuration": 1209600,
     "votingDuration": 86400,
+    "messages": 27406,
+    "maxMessages": 4294967295,
+    "maxRecipients": 124,
     "userRegistryAddress": "0x631a12430F94207De980D9b6A744AEB4093DCeC1",
-    "recipientRegistryAddress": "0x998b330B1424e343b18D83169C19bca4DE39153F"
+    "recipientRegistryAddress": "0x998b330B1424e343b18D83169C19bca4DE39153F",
+    "recipientDepositAmount": "1000000000000000",
+    "operator": "ETHColombia",
+    "chainId": 42161
   },
   "projects": [
     {
