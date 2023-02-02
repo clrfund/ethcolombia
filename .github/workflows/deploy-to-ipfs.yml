@@ -2,9 +2,25 @@ name: Deploy to IPFS
 
 on:
   workflow_dispatch:
-
+    inputs:
+      subdomain:
+        type: choice
+        description: subdomain of clr.fund
+        options:
+        - ethcolombia
+        - ethstaker
 env:
   NODE_VERSION: 16.x
+  IPFS_DEPLOY_PINATA__API_KEY: ${{ secrets.PINATA_API_KEY }}
+  IPFS_DEPLOY_PINATA__SECRET_API_KEY: ${{ secrets.PINATA_SECRET_API_KEY }}
+  IPFS_DEPLOY_CLOUDFLARE__API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+  IPFS_DEPLOY_CLOUDFLARE__ZONE: clr.fund
+  IPFS_DEPLOY_CLOUDFLARE__RECORD: "_dnslink.${{ github.event.inputs.subdomain }}.clr.fund"
+
+teps:
+    - name: Send greeting
+      run: echo "${{ github.event.inputs.message }} ${{ fromJSON('["", ""]')[github.event.inputs.use-emoji == 'true'] }} ${{ github.event.inputs.name }}"
+
 
 jobs:
   build:
@@ -34,6 +50,6 @@ jobs:
     - id: upload
       name: Upload
       run: |
-        npm i -g pinata-upload-cli
-        pinata-cli -a ${{ secrets.PINATA_JWT }}
-        pinata-cli -u ./dist
+        echo ${{ env.IPFS_DEPLOY_CLOUDFLARE__RECORD }}
+        #npm install -g ipfs-deploy
+        #ipfs-deploy -u pinata -p infura -d cloudflare ./dist
