@@ -142,10 +142,33 @@ import { MAX_CONTRIBUTION_AMOUNT } from '@/api/contributions'
 import Links from '@/components/Links.vue'
 import { useRoundStore } from '@/stores'
 import { storeToRefs } from 'pinia'
+import { computed } from 'vue'
 
-const { nativeTokenSymbol } = storeToRefs(useRoundStore())
-const contributionPhaseDays = 'TBD'
+const {
+  nativeTokenSymbol,
+  maxRecipients,
+  signUpDeadline,
+  startTime,
+  votingDeadline,
+} = storeToRefs(useRoundStore())
 const maxContributionAmount = MAX_CONTRIBUTION_AMOUNT
-const reallocationPhaseDays = 'TBD'
-const maxRecipients = 'number'
+
+const contributionPhaseDays = computed((): number | string => {
+  if (signUpDeadline.value.toSeconds() > 0) {
+    return Math.ceil(
+      (signUpDeadline.value.toSeconds() - startTime.value.toSeconds()) /
+        (24 * 60 * 60)
+    )
+  }
+  return 'TBD'
+})
+const reallocationPhaseDays = computed((): number | string => {
+  if (votingDeadline.value.toSeconds() > 0) {
+    return Math.ceil(
+      (votingDeadline.value.toSeconds() - signUpDeadline.value.toSeconds()) /
+        (24 * 60 * 60)
+    )
+  }
+  return 'TBD'
+})
 </script>
