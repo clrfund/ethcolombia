@@ -17,11 +17,6 @@ env:
   IPFS_DEPLOY_CLOUDFLARE__ZONE: clr.fund
   IPFS_DEPLOY_CLOUDFLARE__RECORD: "_dnslink.${{ github.event.inputs.subdomain }}.clr.fund"
 
-teps:
-    - name: Send greeting
-      run: echo "${{ github.event.inputs.message }} ${{ fromJSON('["", ""]')[github.event.inputs.use-emoji == 'true'] }} ${{ github.event.inputs.name }}"
-
-
 jobs:
   build:
     runs-on: ubuntu-22.04
