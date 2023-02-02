@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { type RoundInfo, RoundStatus } from '@/api/round'
 import { type ChainDetails, CHAIN_INFO } from '@/plugins/Web3/constants/chains'
-import { BigNumber, FixedNumber } from 'ethers'
+import { BigNumber } from 'ethers'
 import { DateTime } from 'luxon'
 import type { Tally } from '@/api/tally'
 import type { LeaderboardProject } from '@/api/projects'
@@ -11,8 +11,6 @@ interface RoundState extends RoundInfo {
   operator: string
   chainId: number
   recipientDepositAmount: BigNumber | null
-  recipientDepositToken: string
-  recipientDepositDecimals: BigNumber
   tally: Tally | null
   leaderboardProjects: LeaderboardProject[] | null
 }
@@ -23,8 +21,6 @@ export const useRoundStore = defineStore('round', {
     userRegistryAddress: '',
     recipientRegistryAddress: '',
     recipientDepositAmount: null,
-    recipientDepositToken: '',
-    recipientDepositDecimals: BigNumber.from(0),
     maciAddress: '',
     recipientTreeDepth: 0,
     maxContributors: 0,
