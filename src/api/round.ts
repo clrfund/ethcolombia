@@ -1,12 +1,12 @@
-import type { BigNumber, FixedNumber } from 'ethers'
+import type { BigNumber } from 'ethers'
 import type { DateTime } from 'luxon'
-import type { Project, LeaderboardProject } from './projects'
-import type { Tally } from './tally'
+import type { Project } from './projects'
 
 export interface RoundInfo {
   fundingRoundAddress: string
   userRegistryAddress: string
   recipientRegistryAddress: string
+  recipientDepositAmount: BigNumber | null
   maciAddress: string
   recipientTreeDepth: number
   maxContributors: number
