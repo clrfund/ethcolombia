@@ -73,7 +73,7 @@
           <li v-if="depositAmount">
             {{
               $t('recipients.register.li6', {
-                depositToken: recipientDepositToken,
+                depositToken: chain.currency,
                 depositAmount: depositAmount,
               })
             }}
@@ -86,9 +86,7 @@
       {{ $t('recipients.register.p4') }}
     </p>
     <p>
-      {{
-        $t('recipients.register.p5', { depositToken: recipientDepositToken })
-      }}
+      {{ $t('recipients.register.p5', { depositToken: chain.currency }) }}
     </p>
     <h2>{{ $t('recipients.claim.h2') }}</h2>
     <p>
@@ -110,22 +108,15 @@ import { formatAmount } from '@/utils/amounts'
 import { useRoundStore } from '@/stores'
 import { storeToRefs } from 'pinia'
 
-const {
-  chain,
-  maxRecipients,
-  recipientDepositAmount,
-  recipientDepositToken,
-  recipientDepositDecimals,
-} = storeToRefs(useRoundStore())
+const { chain, maxRecipients, recipientDepositAmount } = storeToRefs(
+  useRoundStore()
+)
 
 const depositAmount = computed(() => {
   if (recipientDepositAmount.value === null) {
     return null
   }
 
-  return formatAmount(
-    recipientDepositAmount.value,
-    recipientDepositDecimals.value
-  )
+  return formatAmount(recipientDepositAmount.value)
 })
 </script>
