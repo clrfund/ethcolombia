@@ -4,7 +4,7 @@ import { BaseRound, sortByAllocatedAmountDesc } from './round-base'
 import type { Tally } from '@/api/tally'
 import type { Project, LeaderboardProject } from './projects'
 import type { Token } from './token'
-import { BigNumber, FixedNumber } from 'ethers'
+import { BigNumber } from 'ethers'
 import { DateTime } from 'luxon'
 import { IPFS } from './ipfs'
 import rounds from '@/rounds/rounds.json'
@@ -49,10 +49,16 @@ function toRoundInfo(round: any, tally: Tally | null): RoundInfo {
   const contributions = BigNumber.from(spent).mul(voiceCreditFactor)
   const totalFunds = matchingPool.add(contributions)
 
+  let recipientDepositAmount: BigNumber | null = null
+  if (round.recipientDepositAmount) {
+    recipientDepositAmount = BigNumber.from(round.recipientDepositAmount)
+  }
+
   return {
     fundingRoundAddress: round.address,
     userRegistryAddress: round.userRegistryAddress,
     recipientRegistryAddress: round.recipientRegistryAddress,
+    recipientDepositAmount,
     maciAddress: round.maciAddress,
     recipientTreeDepth: 0,
     maxContributors: 0,
@@ -66,8 +72,14 @@ function toRoundInfo(round: any, tally: Tally | null): RoundInfo {
     status: toRoundStatus(round),
     startTime: DateTime.fromSeconds(round.startTime),
     contributors: round.contributorCount,
-    signUpDeadline: DateTime.fromSeconds(0),
-    votingDeadline: DateTime.fromSeconds(0),
+    signUpDeadline: DateTime.fromSeconds(
+      Number(round.startTime || 0) + Number(round.signUpDuration || 0)
+    ),
+    votingDeadline: DateTime.fromSeconds(
+      Number(round.startTime || 0) +
+        Number(round.signUpDuration || 0) +
+        Number(round.votingDuration || 0)
+    ),
     totalFunds,
     matchingPool,
     contributions,
