@@ -1,6 +1,6 @@
 <template>
   <tr>
-    <td class="image-container">
+    <td class="image-container rank-col">
       <img v-if="isFirst" src="@/assets/medal/medal-1.svg" />
       <img v-else-if="isSecond" src="@/assets/medal/medal-2.svg" />
       <img v-else-if="isThird" src="@/assets/medal/medal-3.svg" />
@@ -67,8 +67,12 @@ const projectImageUrl = computed(() => {
 @import '../styles/theme';
 
 td {
-  padding: 8px;
+  padding: 8px 3px;
   vertical-align: top;
+}
+
+td.rank-col {
+  padding-left: 0;
 }
 
 td.project {
