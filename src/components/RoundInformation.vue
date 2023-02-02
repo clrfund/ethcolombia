@@ -202,8 +202,6 @@ const formatTotalInRound = computed(() => {
     return ''
   }
 
-  console.log('contributioins', contributions.value)
-  console.log('matchinPool', matchingPool.value)
   const totalInRound = contributions.value.add(matchingPool.value)
   return formatAmount(totalInRound)
 })
