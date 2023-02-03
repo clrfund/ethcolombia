@@ -8,8 +8,8 @@ env:
   IPFS_DEPLOY_PINATA__API_KEY: ${{ secrets.PINATA_API_KEY }}
   IPFS_DEPLOY_PINATA__SECRET_API_KEY: ${{ secrets.PINATA_SECRET_API_KEY }}
   IPFS_DEPLOY_CLOUDFLARE__API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-  IPFS_DEPLOY_CLOUDFLARE__ZONE: clr.fund
-  IPFS_DEPLOY_CLOUDFLARE__RECORD: "_dnslink.${{ github.ref_name }}.clr.fund"
+  IPFS_DEPLOY_CLOUDFLARE__ZONE: ethstaker.cc
+  IPFS_DEPLOY_CLOUDFLARE__RECORD: "_dnslink.qf.ethstaker.cc"
 
 jobs:
   build:
