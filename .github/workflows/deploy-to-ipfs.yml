@@ -43,4 +43,4 @@ jobs:
       run: |
         echo ${{ env.IPFS_DEPLOY_CLOUDFLARE__RECORD }}
         npm install -g ipfs-deploy
-        ipfs-deploy -u pinata -d cloudflare ./dist
+        ipfs-deploy -u pinata -d cloudflare -C ./dist
