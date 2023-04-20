@@ -1,7 +1,7 @@
 <template>
   <nav id="nav-bar">
     <links to="/">
-      <img class="clr-logo" :alt="operator" src="@/assets/ethColombia.svg" />
+      <img class="clr-logo" :alt="operator" src="@/assets/clr.svg" />
     </links>
     <div class="btn-row">
       <div class="help-dropdown" v-click-outside="closeHelpDropdown">
@@ -100,7 +100,7 @@ function toggleHelpDropdown(): void {
   height: 64px;
   justify-content: space-between;
   align-items: center;
-  background: $clr-black;
+  background: var(--bg-secondary-color);
   box-shadow: $box-shadow-nav-bar;
   @media (max-width: $breakpoint-m) {
     padding: 0 1rem;
@@ -168,7 +168,7 @@ function toggleHelpDropdown(): void {
 
   .clr-logo {
     margin: 0;
-    height: 3.25rem;
+    height: 2.25rem;
     vertical-align: middle;
   }
 

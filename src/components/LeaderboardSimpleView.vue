@@ -94,8 +94,7 @@ td.project {
   align-items: center;
   box-shadow: 0px 4px 4px 0px 0, 0, 0, 0.25;
   flex: 0 0 auto;
-  border: 2px solid var(--border-color);
-
+  
   img {
     object-fit: cover;
     width: 100%;

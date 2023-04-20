@@ -12,14 +12,6 @@
             <div id="subtitle" class="subtitle">
               {{ $t('landing.hero.subtitle') }}
             </div>
-
-            <div class="organizers-wrapper">
-              <image-responsive
-                title="organizers"
-                class="organizers"
-                alt="organizers of QF round."
-              />
-            </div>
             <div class="btn-group">
               <links to="/projects" class="btn-action">{{
                 $t('landing.view_results')
@@ -310,6 +302,7 @@ ol li::before {
   }
 
   .image-wrapper img {
+    mix-blend-mode: exclusion;
     position: absolute;
     padding-top: 2rem;
     width: 70%;
@@ -364,7 +357,7 @@ ol li::before {
   }
 
   #moon {
-    mix-blend-mode: color-dodge;
+    mix-blend-mode: exclusion;
     position: absolute;
     top: 0;
     right: 0;
